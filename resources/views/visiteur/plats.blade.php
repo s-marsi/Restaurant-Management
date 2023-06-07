@@ -3,14 +3,15 @@
 
 @section("contenue")
 
-
-<div class="card bg-dark text-white mb-3 mx-auto" style="max-width: calc(100% - 10%);">
-  <img src="{{asset($categorie->photo)}}" class="card-img" alt="Categorie Image" style="max-height: 250px;">
-  <div class="card-img-overlay">
-    <h5 class="card-title">{{$categorie->titre}}</h5>
-    <p class="card-text">{{count($plats)}} plats</p>
+@isset($categorie)
+  <div class="card bg-dark text-white mb-3 mx-auto" style="max-width: calc(100% - 10%);">
+    <img src="{{asset($categorie->photo)}}" class="card-img" alt="{{$categorie->titre}}" style="max-height: 250px;">
+    <div class="card-img-overlay">
+      <h5 class="card-title">{{$categorie->titre}}</h5>
+      <p class="card-text">{{count($plats)}} plats</p>
+    </div>
   </div>
-</div>
+@endisset
 
 
 
@@ -19,7 +20,7 @@
   <div class="card mb-3 mx-auto" style="max-width: calc(100% - 10%); max-height : 200px; ">
     <div class="row no-gutters">
       <div class="col-md-3">
-        <img src="@isset($plat->photo){{asset($plat->photo)}} @else {{asset("categories/no-image.gif")}}@endisset" class="categorieBg card-img w-100 ml-0" alt="Image de plat" >
+        <img src="{{asset($plat->getPhoto())}}" class="categorieBg card-img w-100 ml-0" alt="{{$plat->intitule}} " >
       </div>
       <div class="col-md-7">
         <div class="card-body">
@@ -40,34 +41,22 @@
 
       <div class="col-md-2">
         @php
-              $star = 0
+              $star =$plat->nombreCommandes() 
         @endphp
-        @foreach($plat->commandes as $com)
-        @php
-              $star += $com->pivot->nombre 
-        @endphp
-        @endforeach
-        @if($star < 4)
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-        @elseif($star < 20)
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-        @elseif($star <= 50)
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-        @elseif($star <= 100)
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-        @elseif($star > 100)
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-          <i class="fa fa-star" style="color:rgb(255, 225, 0)"></i>
-        @endif
+        @switch($star)
+          @case($star < 4)  
+            <i class="fa fa-star" style="color:gold"></i>
+          @case($star < 20)
+            <i class="fa fa-star" style="color:gold"></i>
+          @case($star <= 50)
+            <i class="fa fa-star" style="color:gold"></i>
+          @case($star <= 100)
+            <i class="fa fa-star" style="color:gold"></i>
+          @case($star > 100)
+            <i class="fa fa-star" style="color:gold"></i>
+          @default
+            <i class="fa fa-star" style="color:gold"></i>
+        @endswitch
         ({{$star}})
       </div>
     </div>

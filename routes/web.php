@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('/menu', [CategorieController::class, "index"])->name("menu");
+Route::get('/plat/{categorie}', [CategorieController::class, "plats"])->name("plats_categorie");
 
 Route::get('/dashboard', function () {
     return view('dashboard');

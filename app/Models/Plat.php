@@ -19,4 +19,12 @@ class Plat extends Model
     public function categorie(){
       return $this->belongsTo(Categorie::class);
     }
+    public function getPhoto(){
+      return $this->photo?? "plats/default.png";
+    }
+    public function nombreCommandes(){
+      return $this->commandes->sum(function($commande){
+        return $commande->pivot->nombre;
+      });
+    }
 }

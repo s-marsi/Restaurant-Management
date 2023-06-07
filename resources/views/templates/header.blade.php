@@ -26,7 +26,7 @@
 <body>
   
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between mx-2">
     <div>
         <a class="navbar-brand" href="#">Mon Resto</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,19 +36,19 @@
     <div >
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">Menu</a>
+          <a class="nav-link @if(Request::is("menu"))  active @endif"  href="{{route("menu")}}">Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Présentation</a>
+          <a class="nav-link"  href="#">Présentation</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Localisation et horaires</a>
+          <a class="nav-link"  href="#">Localisation et horaires</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link"  href="#">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          <a class="nav-link"  href="#">Login</a>
         </li>
         
       </ul>
