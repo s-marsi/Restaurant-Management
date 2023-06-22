@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-            CategorieSeeder::class,
-            PlatSeeder::class,
-            ComposantSeeder::class,
-          ComposantPlatSeeder::class,
-            ServeurSeeder::class,
-            CommandeSeeder::class,
-            CommandePlatSeeder::class
+          //   CategorieSeeder::class,
+          //   PlatSeeder::class,
+          //   ComposantSeeder::class,
+          // ComposantPlatSeeder::class,
+          //   ServeurSeeder::class,
+          //   CommandeSeeder::class,
+          //   CommandePlatSeeder::class
         ]);
     }
 }

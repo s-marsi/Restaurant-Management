@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\DashbordController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,9 +23,7 @@ Route::get('/', function () {
 Route::get('/menu', [CategorieController::class, "index"])->name("menu");
 Route::get('/plat/{categorie}', [CategorieController::class, "plats"])->name("plats_categorie");
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[DashbordController::class, "index"])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,4 +31,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::view("login", "auth.login")->middleware("guest");
+Route::view("register", "auth.register")->middleware("guest");
 require __DIR__.'/auth.php';
